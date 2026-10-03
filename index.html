@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clipnest</title>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+
+  <body>
+    <header class="top">
+      <div>
+        <h1>Clipnest</h1>
+        <p>복사한 이미지가 여기에 모입니다. 항목을 누르면 다시 복사됩니다.</p>
+      </div>
+      <p id="count" class="count">0개</p>
+    </header>
+    <main>
+      <p id="empty" class="empty">
+        아직 저장된 이미지가 없습니다. 이미지를 복사하면 여기에 나타납니다.
+      </p>
+      <p id="status" class="status" hidden></p>
+      <ul id="gallery" class="gallery"></ul>
+    </main>
+  </body>
+</html>

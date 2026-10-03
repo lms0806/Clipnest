@@ -1,2 +1,12 @@
 # Clipnest
-캡처한 이미지를 모아서 재활용하는 애플리케이션 입니다.
+
+복사한 이미지를 모아 두고, 다시 복사해 쓰는 앱입니다.
+
+요구사항은 [REQUIREMENTS.md](REQUIREMENTS.md)에 있습니다.
+
+## 실행
+
+```bash
+npm install
+npm run tauri dev
+```
