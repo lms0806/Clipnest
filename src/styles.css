@@ -152,3 +152,50 @@ main {
 .card.is-copied {
   border-color: #1c1917;
 }
+
+.viewer {
+  margin: 0;
+  padding: 32px;
+  border: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  background: transparent;
+}
+
+.viewer[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer::backdrop {
+  background: rgba(28, 25, 23, 0.78);
+}
+
+.viewer img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.viewer-close {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: #fafaf9;
+  color: #1c1917;
+  cursor: pointer;
+}
+
+.viewer-close:focus-visible {
+  outline: 2px solid #fafaf9;
+  outline-offset: 2px;
+}

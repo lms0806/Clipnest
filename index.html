@@ -12,7 +12,7 @@
     <header class="top">
       <div>
         <h1>Clipnest</h1>
-        <p>복사한 이미지가 여기에 모입니다. 항목을 누르면 다시 복사됩니다.</p>
+        <p>클릭하면 복사되고, 우클릭하면 크게 볼 수 있습니다.</p>
       </div>
       <p id="count" class="count">0개</p>
     </header>
@@ -23,5 +23,9 @@
       <p id="status" class="status" hidden></p>
       <ul id="gallery" class="gallery"></ul>
     </main>
+    <dialog id="viewer" class="viewer">
+      <img id="viewer-image" alt="" />
+      <button type="button" id="viewer-close" class="viewer-close">닫기</button>
+    </dialog>
   </body>
 </html>

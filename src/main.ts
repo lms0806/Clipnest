@@ -14,10 +14,14 @@ const gallery = document.querySelector<HTMLUListElement>("#gallery");
 const empty = document.querySelector<HTMLParagraphElement>("#empty");
 const count = document.querySelector<HTMLParagraphElement>("#count");
 const status = document.querySelector<HTMLParagraphElement>("#status");
+const viewer = document.querySelector<HTMLDialogElement>("#viewer");
+const viewerImage = document.querySelector<HTMLImageElement>("#viewer-image");
+const viewerClose = document.querySelector<HTMLButtonElement>("#viewer-close");
 
 let images: SavedImage[] = [];
 let copiedId = "";
 let copiedTimer = 0;
+let viewingId = "";
 let ready = false;
 const pendingAdded: SavedImage[] = [];
 
@@ -59,8 +63,13 @@ function render() {
     const thumb = document.createElement("button");
     thumb.type = "button";
     thumb.className = "thumb";
+    thumb.setAttribute("aria-label", "클릭하면 복사하고, 우클릭하면 크게 봅니다");
     thumb.addEventListener("click", () => {
       void copyImage(image.id);
+    });
+    thumb.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+      openViewer(image);
     });
 
     const picture = document.createElement("img");
@@ -95,6 +104,25 @@ function render() {
     card.append(thumb, meta);
     gallery.append(card);
   }
+}
+
+function openViewer(image: SavedImage) {
+  if (!viewer || !viewerImage) {
+    return;
+  }
+  viewingId = image.id;
+  viewerImage.src = convertFileSrc(image.path);
+  viewerImage.alt = `크게 보는 이미지, ${image.width}×${image.height}`;
+  viewerImage.removeAttribute("width");
+  viewerImage.removeAttribute("height");
+  if (!viewer.open) {
+    viewer.showModal();
+  }
+}
+
+function closeViewer() {
+  viewingId = "";
+  viewer?.close();
 }
 
 function addImage(image: SavedImage) {
@@ -147,7 +175,22 @@ async function start() {
 
   await listen<string>("image-removed", (event) => {
     images = images.filter((image) => image.id !== event.payload);
+    if (event.payload === viewingId) {
+      closeViewer();
+    }
     render();
+  });
+
+  viewerClose?.addEventListener("click", () => {
+    closeViewer();
+  });
+  viewer?.addEventListener("click", (event) => {
+    if (event.target === viewer) {
+      closeViewer();
+    }
+  });
+  viewer?.addEventListener("close", () => {
+    viewingId = "";
   });
 
   try {
