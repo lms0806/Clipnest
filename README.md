@@ -10,3 +10,9 @@
 npm install
 npm run tauri dev
 ```
+
+## 릴리즈 빌드
+
+```bash
+npm run tauri build
+```
